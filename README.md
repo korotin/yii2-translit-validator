@@ -11,7 +11,7 @@ Installation
 Install validator with Composer:
 
 ```
-composer require --prefer-dist herroffizier/yii2-translit-validator "*"
+composer require --prefer-dist "herroffizier/yii2-translit-validator:dev-master"
 ```
 
 Usage
@@ -29,7 +29,11 @@ public function rules()
 {
     return [
         [['attribute'], 'required'],
-        [['attribute_translit'], TranslitValidator::className(), 'sourceAttribute' => 'attribute'],
+        [
+            ['attribute_translit'], 
+            TranslitValidator::className(), 
+            'sourceAttribute' => 'attribute'
+        ],
         [['attribute_translit'], 'required'],
     ];
 }
@@ -40,5 +44,5 @@ Validator has a few options to customize its behavior.
 * ```sourceAttribute``` as mentioned above points to source attribute which value should be transliterated. Empty by default and required.
 * ```lowercase``` enforces lower case for transliterated string. Default is ```true```.
 * ```forUrl``` replaces all invalid characters with ```invalidReplacement``` value. Default is ```true```.
-* ```invalidReplacement``` is a replacement for invalid characters. Used in conjuction with ```forUrl```. Default is ```-```.
-* ```invalidRegexp``` is a regular expression which matches all incorrect symbols for URL. Used in conjuction with ```forUrl```. Default is ```/[^a-z0-9]+/i``` which matches all alphanumeric symbols.
+* ```invalidReplacement``` is a replacement for invalid characters. Used in conjunction with ```forUrl```. Default is ```-```.
+* ```invalidRegexp``` is a regular expression which matches all incorrect symbols for URL. Used in conjunction with ```forUrl```. Default is ```/[^a-z0-9]+/i``` which matches all non-alphanumeric symbols.
