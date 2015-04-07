@@ -1,0 +1,23 @@
+language: php
+
+php:
+    - 5.6
+    - 5.5
+    - 5.4
+
+install:
+    - composer self-update
+    - composer global require "fxp/composer-asset-plugin:1.0.0"
+    - composer global require "codeception/codeception=2.0.*"
+    - composer global require "codeception/specify=*"
+    - composer global require "codeception/verify=*"
+    - composer install --no-interaction --prefer-source
+
+before_script:
+  - mysql -e 'create database test;'
+
+script: ./vendor/bin/phing test
+
+after_script:
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar code-coverage:upload --format=php-clover ./tests/codeception/_output/coverage.xml

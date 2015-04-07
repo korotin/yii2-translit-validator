@@ -1,0 +1,12 @@
+class_name: UnitTester
+
+modules:
+   enabled: [Db]
+   config:
+      Db:
+         dsn: 'mysql:host=localhost;dbname=test'
+         user: 'root'
+         password: ''
+         dump: 'codeception/_data/dump.sql'
+         populate: true
+         cleanup: true

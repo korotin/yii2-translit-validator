@@ -1,0 +1,11 @@
+# composer vendor dir
+/vendor
+
+# vagrant dir
+/.vagrant
+
+# code coverage reports
+/tests/codeception/_output/*
+
+# st3 project and workspace files
+*.sublime-*

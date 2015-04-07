@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="yii2-translit-validator" default="help">
+    <target name="help">
+        <echo>Available commands:
+
+        * cs            - run phpcs
+        * lint          - run php lint
+        * clearreport   - clear report folder
+        * phpunit       - run phpunit
+        * test          - test library
+        * help          - this message</echo>
+    </target>
+
+    <target name="cs">
+        <exec 
+            command="./vendor/bin/phpcs --ignore=./vendor/ --report=full --standard=PSR2 -p ." 
+            passthru="true" 
+            checkreturn="true"
+        />
+    </target>
+
+    <target name="lint">
+        <phplint 
+            haltonfailure="true"
+            deprecatedAsError="true"
+        >
+            <fileset dir=".">
+                <include name="**/*.php"/>
+                <exclude name="vendor/"/>
+            </fileset>
+        </phplint>
+    </target>
+
+    <target name="clearreport">
+        <delete includeemptydirs="true" verbose="true">
+            <fileset dir="./tests/codeception/_output">
+                <exclude name=".gitkeep"/>
+                <include name="*"/>
+                <include name="**/*"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="codeception">
+        <exec 
+            dir="./tests/"
+            command="./../vendor/bin/codecept run --coverage-xml --coverage-html" 
+            passthru="true" 
+            checkreturn="true"
+        />
+    </target>
+
+    <target name="test">
+        <phingcall target="clearreport"/>
+        <phingcall target="lint"/>
+        <phingcall target="cs"/>
+        <phingcall target="codeception"/>
+    </target>
+</project>
