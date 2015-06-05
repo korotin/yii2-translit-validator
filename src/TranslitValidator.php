@@ -36,7 +36,7 @@ class TranslitValidator extends Validator
     public $lowercase = true;
 
     /**
-     * Wheter to prepare transiterated string for URL.
+     * Whether to prepare transliterated string for URL.
      *
      * If set to true, all invalid characters matched by $invalidRegexp will be
      * replaced with $invalidReplacement string.
@@ -60,6 +60,13 @@ class TranslitValidator extends Validator
      * @var string
      */
     public $invalidReplacement = '-';
+
+    /**
+     * Trim invalid characters at beginning and at end of given string.
+     *
+     * @var boolean
+     */
+    public $trimInvalid = false;
 
     /**
      * Cached escaped invalid replacement.
@@ -90,6 +97,8 @@ class TranslitValidator extends Validator
      */
     protected function prepareForUrl($value)
     {
+        $escapedInvalidReplacement = $this->getEscapedInvalidReplacement();
+
         // First, replace all invalid characters with replacement string.
         $value =
             preg_replace(
@@ -100,10 +109,19 @@ class TranslitValidator extends Validator
         // Second, replace all possible repeats of replacement string with single one.
         $value =
             preg_replace(
-                '/('.$this->getEscapedInvalidReplacement().'){2,}/',
+                '/('.$escapedInvalidReplacement.'){2,}/',
                 $this->invalidReplacement,
                 $value
             );
+
+        if ($this->trimInvalid) {
+            $value =
+                preg_replace(
+                    '/(^'.$escapedInvalidReplacement.'|'.$escapedInvalidReplacement.'$)/',
+                    '',
+                    $value
+                );
+        }
 
         return $value;
     }

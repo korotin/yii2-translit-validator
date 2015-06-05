@@ -61,6 +61,13 @@ class Model extends \yii\db\ActiveRecord
                 'invalidRegexp' => '/[^a-z0-9_]+/i',
                 'on' => 'validatorCustomInvalidRegexp',
             ],
+            [
+                ['attribute_translit'],
+                TranslitValidator::className(),
+                'sourceAttribute' => 'attribute',
+                'trimInvalid' => true,
+                'on' => 'validatorTrimInvalid',
+            ],
             [['attribute', 'attribute_translit'], 'required'],
             [['attribute', 'attribute_translit'], 'string', 'max' => 255],
         ];

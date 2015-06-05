@@ -80,5 +80,19 @@ class TranslitValidatorTest extends TestCase
             $this->assertTrue($model->save());
             $this->assertEquals('proverka_svyazi', $model->attribute_translit);
         });
+
+        $this->specify('trim invalid flag is respected', function () {
+            $model = new Model();
+            $model->scenario = 'validator';
+            $model->attribute = '((Проверка связи))';
+            $this->assertTrue($model->save());
+            $this->assertEquals('-proverka-svyazi-', $model->attribute_translit);
+
+            $model = new Model();
+            $model->scenario = 'validatorTrimInvalid';
+            $model->attribute = '((Проверка_связи))';
+            $this->assertTrue($model->save());
+            $this->assertEquals('proverka-svyazi', $model->attribute_translit);
+        });
     }
 }

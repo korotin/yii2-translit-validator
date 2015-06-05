@@ -46,3 +46,4 @@ Validator has a few options to customize its behavior.
 * ```forUrl``` replaces all invalid characters with ```invalidReplacement``` value. Default is ```true```.
 * ```invalidReplacement``` is a replacement for invalid characters. Used in conjunction with ```forUrl```. Default is ```-```.
 * ```invalidRegexp``` is a regular expression which matches all incorrect symbols for URL. Used in conjunction with ```forUrl```. Default is ```/[^a-z0-9]+/i``` which matches all non-alphanumeric symbols.
+* ```trimInvalid``` trims invalid characters at beginning and at end of given string. Used in conjunction with ```forUrl```. Default is ```false``` which means that no characters will be trimmed.
