@@ -1,6 +1,8 @@
 {
     "name": "herroffizier/yii2-translit-validator",
     "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "minimum-stability": "stable",
     "keywords": ["yii", "yii2", "yii 2", "extension", "validator", "translit", "transliteration", "slug", "urlify"],
     "description": "Yii2 validator that transliterates model attribute values.",
     "require": {
