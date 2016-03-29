@@ -11,7 +11,7 @@ Installation
 Install validator with Composer:
 
 ```
-composer require --prefer-dist "herroffizier/yii2-translit-validator:dev-master"
+composer require --prefer-dist "herroffizier/yii2-translit-validator:@stable"
 ```
 
 Usage
